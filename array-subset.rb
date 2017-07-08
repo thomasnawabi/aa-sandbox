@@ -14,14 +14,17 @@
 # Those that do not contain 3 (all of these are subsets of [1, 2]).
 # For every subset that does not contain 3, there is also a corresponding subset that is the same, except it also does contain 3.
 
+require 'byebug'
+
 class Array
 
   def subsets
+    # debugger
     return [[]] if self == []
     all_but_last = self[0...-1].subsets
     last = self[-1]
-    all_but_last + all_but_last.map { |el| el << last }
-  end
+    all_but_last.map { |el| el.dup } + all_but_last.map { |el| el << last }
+    end
 
 end
 
