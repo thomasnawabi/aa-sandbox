@@ -99,7 +99,10 @@ end
 # Function is defined Γ(n) = (n-1)!.
 
 def gamma_fnc(n)
-
+  return nil if n == 0
+  return 1 if n == 1
+  prev = gamma_fnc(n - 1)
+  (n -  1) * prev
 end
 
 # Return an array of all numbers in the range, excluding max (recursive)
