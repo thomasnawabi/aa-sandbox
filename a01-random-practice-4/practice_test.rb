@@ -5,7 +5,26 @@
 # base_converter(31, 16) == "1f"
 
 def base_converter(num, b)
-  # MISSING
+  return "" if num == 0
+
+  digits = %w(0 1 2 3 4 5 6 7 8 9 a b c d e f)
+  base_converter(num / b, b) + digits[num % b]
+end
+
+def find_exp(num, b)
+  idx = 0
+  while b ** idx <= num
+    idx += 1
+  end
+  idx - 1
+end
+
+def find_digit(n)
+  if n < 10
+    n.to_s
+  else
+    (87 + n).chr
+  end
 end
 
 class Array
