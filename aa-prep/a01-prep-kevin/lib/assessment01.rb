@@ -126,7 +126,25 @@ end
 # return b^n recursively. Accept negative value for n
 
 def exponent(base, exp)
-
+  return 1 if exp == 0
+  return base if exp == 1
+  if exp > -1
+    if exp.even?
+      prev = exponent(base, exp / 2)
+      prev * prev
+    else
+      prev = exponent(base, (exp - 1) / 2)
+      prev * prev * base
+    end
+  else
+    if exp.even?
+      prev = 1.0 / exponent(base, (-1) * exp / 2)
+      prev * prev
+    else
+      prev = 1.0 / exponent(base, (-1) * (exp - 1) / 2)
+      prev * prev * base
+    end
+  end
 end
 
 class Array
