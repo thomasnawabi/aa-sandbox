@@ -4,13 +4,19 @@ require 'byebug'
 
 class Player
 
-  def initialize
+  attr_reader :name
+  attr_accessor :hand
+
+  def initialize(name, hand = [])
+    @name, @hand = name, hand
   end
 
   def hand_size
+    hand.count
   end
 
-  def draw
+  def draw(deck)
+    self.hand << deck.draw
   end
 
   def show_hand
@@ -20,16 +26,22 @@ class Player
   end
 
   #in this version, you can only draw if you have no valid cards to play.
-  def get_cards
+  def get_cards(deck)
+    until valid_card?(deck)
+      self.draw(deck)
+    end
   end
 
-  def valid_card?
+  def valid_card?(deck)
+    hand.any? do |card|
+      card.valid_match?(deck.last_discarded)
+    end
   end
 
   def has_play?
   end
 
-  def play_card
+  def play_card(deck)
   end
 
   def crazy_eights

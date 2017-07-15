@@ -1,4 +1,4 @@
-require 'colorize'
+# require 'colorize'
 #comment in for fun colors!
 
 # -*- coding: utf-8 -*-
@@ -8,26 +8,46 @@ class Card
 
   # Returns an array of all suits.
   def self.suits
+    [:spades, :clubs, :hearts, :diamonds]
   end
 
   # Returns an array of all values.
   def self.values
+    [
+      :ace,
+      :deuce,
+      :three,
+      :four,
+      :five,
+      :six,
+      :seven,
+      :eight,
+      :nine,
+      :ten,
+      :jack,
+      :queen,
+      :king
+    ]
   end
 
   attr_reader :suit, :value
 
-  def initialize
+  def initialize(suit, value)
+    @suit, @value = suit, value
   end
 
   #this should be pretty self explanatory.
-  def same_suit?
+  def same_suit?(other_card)
+    self.suit == other_card.suit
   end
 
   #yep.
-  def same_value?
+  def same_value?(other_card)
+    self.value == other_card.value
   end
 
   def crazy?
+    self.value == :eight
   end
 
   def string_value
@@ -38,7 +58,8 @@ class Card
   # end
 
   #if card can be played on top of the previous card in the discard pile
-  def valid_match?
+  def valid_match?(other_card)
+    self.value == :ace || self.same_suit?(other_card) || self.same_value?(other_card) || self.value == :suit_changer
   end
 
   # def valid_place?(top_of_pile, card)
