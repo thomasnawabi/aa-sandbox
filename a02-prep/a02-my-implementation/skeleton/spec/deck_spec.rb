@@ -16,7 +16,7 @@ describe Deck do
       deduped_cards = all_cards
         .map { |card| [card.suit, card.value] }
         .sort
-        
+
       expect(deduped_cards).to eq(all_card_vals)
     end
   end
@@ -45,8 +45,13 @@ describe Deck do
     Deck.new(cards.dup)
   end
 
-  it "does not expose its cards directly" do
-    expect(deck).not_to respond_to(:cards)
+  describe "#shuffle!" do
+
+    let(:deck2) { Deck.new }
+    it "shuffles the deck" do
+        deck.shuffle!
+        expect(deck.cards).not_to eq(deck2.cards)
+    end
   end
 
   describe "#take" do

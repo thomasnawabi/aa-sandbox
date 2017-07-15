@@ -25,19 +25,20 @@ class Card
     :ace   => "A"
   }
 
-  BLACKJACK_VALUE = {
+  CRAZY_EIGHTS_VALUE = {
     :deuce => 2,
     :three => 3,
     :four  => 4,
     :five  => 5,
     :six   => 6,
     :seven => 7,
-    :eight => 8,
+    :eight => 50,
     :nine  => 9,
     :ten   => 10,
     :jack  => 10,
     :queen => 10,
-    :king  => 10
+    :king  => 10,
+    :ace => 1
   }
 
   # Returns an array of all suits.
@@ -60,10 +61,8 @@ class Card
     @suit, @value = suit, value
   end
 
-  def blackjack_value
-    raise "ace has special value" if value == :ace
-
-    BLACKJACK_VALUE[value]
+  def crazy_eights_value
+    CRAZY_EIGHTS_VALUE[value]
   end
 
   # Compares two cards to see if they're equal in suit & value.
